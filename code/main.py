@@ -3,6 +3,7 @@ from json import load
 from os.path import isdir
 from time import time
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -22,6 +23,13 @@ def check_exists(arg_folder_name, arg_descriptor):
     else:
         logger.warning('%s %s does not exist. Quitting.' % (arg_descriptor, arg_folder_name))
         quit()
+
+
+def strip_text(text):
+    try:
+        return text.strip()
+    except AttributeError:
+        return text
 
 
 if __name__ == '__main__':
@@ -46,8 +54,23 @@ if __name__ == '__main__':
     full_input_file = input_folder + input_file
     logger.debug('loading data from input file %s' % full_input_file)
     data = pd.read_csv(full_input_file, sep='|')
+    logger.debug(data.columns.values)
+    data.columns = [item.strip() for item in data.columns.values]
+    logger.debug(data.columns.values)
     logger.debug(data.shape)
-
+    logger.debug(data.dtypes)
+    logger.debug(data.head(10))
+    event_date = 'Event Date'
+    total_fatalities = 'Total Fatal Injuries'
+    data[event_date] = data[event_date].astype('datetime64')
+    data = data[data[total_fatalities] != '  ']
+    logger.debug(data.shape)
+    data[total_fatalities] = data[total_fatalities].astype('int')
+    logger.debug(data[total_fatalities].unique())
+    t0 = data[data[total_fatalities] > 0]
+    logger.debug(t0.shape)
+    t0[[total_fatalities, event_date]].groupby(by=[event_date]).count().plot(kind="bar")
+    plt.show()
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
