@@ -54,9 +54,9 @@ if __name__ == '__main__':
     full_input_file = input_folder + input_file
     logger.debug('loading data from input file %s' % full_input_file)
     data = pd.read_csv(full_input_file, sep='|')
-    logger.debug(data.columns.values)
-    data.columns = [item.strip() for item in data.columns.values]
-    logger.debug(data.columns.values)
+    logger.debug(data.columns)
+    data.columns = [item.strip() for item in data.columns]
+    logger.debug(data.columns)
     logger.debug(data.shape)
     logger.debug(data.dtypes)
     logger.debug(data.head(10))
