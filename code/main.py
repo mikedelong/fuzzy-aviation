@@ -70,6 +70,10 @@ if __name__ == '__main__':
     t0 = data[data[total_fatalities] > 0]
     logger.debug(t0.shape)
     t0[[total_fatalities, event_date]].groupby(by=[event_date]).count().plot(kind="bar")
+
+    output_folder = get_setting('output_folder', settings)
+    check_exists(output_folder, 'output folder')
+
     plt.show()
     logger.debug('done')
     finish_time = time()
