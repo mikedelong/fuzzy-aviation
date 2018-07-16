@@ -1,5 +1,6 @@
 {
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
+  "output_folder": "../output/",
   "zz": 0
 }
