@@ -73,8 +73,11 @@ if __name__ == '__main__':
 
     output_folder = get_setting('output_folder', settings)
     check_exists(output_folder, 'output folder')
+    output_file = get_setting('dates_fatalities_graph', settings)
+    full_output_file = output_folder + output_folder + output_file
+    logger.debug('writing dates-fatalities graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
 
-    plt.show()
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
