@@ -1,4 +1,5 @@
 {
+  "dates_fatalities_graph": "dates_fatalities.png",
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
   "output_folder": "../output/",
