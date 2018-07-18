@@ -25,12 +25,6 @@ def check_exists(arg_folder_name, arg_descriptor):
         quit()
 
 
-def strip_text1(text):
-    try:
-        return text.strip()
-    except AttributeError:
-        return text
-
 
 if __name__ == '__main__':
     start_time = time()
