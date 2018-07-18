@@ -25,7 +25,7 @@ def check_exists(arg_folder_name, arg_descriptor):
         quit()
 
 
-def strip_text(text):
+def strip_text1(text):
     try:
         return text.strip()
     except AttributeError:
@@ -60,23 +60,13 @@ if __name__ == '__main__':
     logger.debug('initial data is %d rows x %d columns' % data.shape)
     for key, value in data.dtypes.items():
         logger.debug('column %s has type: %s' % (key, value))
-    logger.debug(data.head(10))
-    event_date = 'Event Date'
     total_fatalities = 'Total Fatal Injuries'
+    event_date = 'Event Date'
+    publication_date = 'Publication Date'
     data[event_date] = data[event_date].astype('datetime64')
-    data = data[data[total_fatalities] != '  ']
-    logger.debug(data.shape)
+    data[total_fatalities].replace('  ', '0', inplace=True)
     data[total_fatalities] = data[total_fatalities].astype('int')
-    logger.debug(data[total_fatalities].unique())
-    t0 = data[data[total_fatalities] > 0]
-    logger.debug(t0.shape)
-    # t0[[event_date, total_fatalities]].groupby(by=[event_date]).count().plot(kind='bar)
-    t1 = t0[[event_date, total_fatalities]].set_index([event_date])
-    logger.debug(t1.shape)
-    t2 = t1.resample('Y').sum()
-    logger.debug(t2.index)
-    logger.debug(t2.shape)
-    t2.plot(kind='bar')
+    data[[event_date, total_fatalities]].set_index([event_date]).resample('Y').sum().plot(kind='bar')
     output_folder = get_setting('output_folder', settings)
     check_exists(output_folder, 'output folder')
     output_file = get_setting('dates_fatalities_graph', settings)
