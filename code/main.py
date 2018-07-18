@@ -54,11 +54,12 @@ if __name__ == '__main__':
     full_input_file = input_folder + input_file
     logger.debug('loading data from input file %s' % full_input_file)
     data = pd.read_csv(full_input_file, sep='|')
-    logger.debug('columns before stripping: %s' % data.columns)
+    logger.debug('columns before stripping: %s' % data.columns.values)
     data.columns = [item.strip() for item in data.columns]
-    logger.debug('columns after stripping: ' % data.columns)
-    logger.debug(data.shape)
-    logger.debug(data.dtypes)
+    logger.debug('columns after stripping: %s' % data.columns.values)
+    logger.debug('initial data is %d rows x %d columns' % data.shape)
+    for key, value in data.dtypes.items():
+        logger.debug('column %s has type: %s' % (key, value))
     logger.debug(data.head(10))
     event_date = 'Event Date'
     total_fatalities = 'Total Fatal Injuries'
