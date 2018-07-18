@@ -60,8 +60,11 @@ if __name__ == '__main__':
         logger.debug('column %s has type: %s' % (key, value))
     cutoff_year = 1979
     kind = 'bar'
-    data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index([event_date]).resample(
-        'Y').sum().plot(kind=kind)
+    data_to_plot = data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index(
+        [event_date]).resample('Y').sum()
+    xticks = pd.to_datetime(data_to_plot.index).year.values
+    axes = data_to_plot.plot(kind=kind)
+    axes.set_xticklabels(xticks)
     output_folder = get_setting('output_folder', settings)
     check_exists(output_folder, 'output folder')
     output_file = get_setting('dates_fatalities_graph', settings)
