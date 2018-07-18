@@ -25,7 +25,6 @@ def check_exists(arg_folder_name, arg_descriptor):
         quit()
 
 
-
 if __name__ == '__main__':
     start_time = time()
 
