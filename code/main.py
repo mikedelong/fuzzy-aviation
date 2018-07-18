@@ -56,7 +56,7 @@ if __name__ == '__main__':
     data = pd.read_csv(full_input_file, sep='|')
     logger.debug('columns before stripping: %s' % data.columns)
     data.columns = [item.strip() for item in data.columns]
-    logger.debug(data.columns)
+    logger.debug('columns after stripping: ' % data.columns)
     logger.debug(data.shape)
     logger.debug(data.dtypes)
     logger.debug(data.head(10))
