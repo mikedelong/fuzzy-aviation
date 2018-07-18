@@ -51,14 +51,13 @@ if __name__ == '__main__':
     data.columns = [item.strip() for item in data.columns]
     logger.debug('columns after stripping: %s' % data.columns.values)
     logger.debug('initial data is %d rows x %d columns' % data.shape)
-    for key, value in data.dtypes.items():
-        logger.debug('column %s has type: %s' % (key, value))
     total_fatalities = 'Total Fatal Injuries'
     event_date = 'Event Date'
-    publication_date = 'Publication Date'
     data[event_date] = data[event_date].astype('datetime64')
     data[total_fatalities].replace('  ', '0', inplace=True)
     data[total_fatalities] = data[total_fatalities].astype('int')
+    for key, value in data.dtypes.items():
+        logger.debug('column %s has type: %s' % (key, value))
     data[[event_date, total_fatalities]].set_index([event_date]).resample('Y').sum().plot(kind='bar')
     output_folder = get_setting('output_folder', settings)
     check_exists(output_folder, 'output folder')
