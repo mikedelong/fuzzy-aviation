@@ -54,7 +54,7 @@ if __name__ == '__main__':
     full_input_file = input_folder + input_file
     logger.debug('loading data from input file %s' % full_input_file)
     data = pd.read_csv(full_input_file, sep='|')
-    logger.debug(data.columns)
+    logger.debug('columns before stripping: %s' % data.columns)
     data.columns = [item.strip() for item in data.columns]
     logger.debug(data.columns)
     logger.debug(data.shape)
@@ -73,6 +73,7 @@ if __name__ == '__main__':
     t1 = t0[[event_date, total_fatalities]].set_index([event_date])
     logger.debug(t1.shape)
     t2 = t1.resample('Y').sum()
+    logger.debug(t2.index)
     logger.debug(t2.shape)
     t2.plot(kind='bar')
     output_folder = get_setting('output_folder', settings)
