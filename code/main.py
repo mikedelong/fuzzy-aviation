@@ -69,7 +69,7 @@ if __name__ == '__main__':
     output_folder = get_setting('output_folder', settings)
     check_exists(output_folder, 'output folder')
     output_file = get_setting('dates_fatalities_graph', settings)
-    full_output_file = output_folder + output_folder + output_file
+    full_output_file = output_folder + output_file
     logger.debug('writing dates-fatalities graph to %s' % full_output_file)
     plt.savefig(full_output_file)
     plt.close()
@@ -80,7 +80,11 @@ if __name__ == '__main__':
     xticks = pd.to_datetime(accident_counts.index).year.values
     axes = accident_counts.plot(kind=kind)
     axes.set_xticklabels(xticks)
-    plt.show()
+    output_file = get_setting('event_counts_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing events counts graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close()
 
 
     logger.debug('done')
