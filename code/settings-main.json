@@ -1,5 +1,6 @@
 {
   "dates_fatalities_graph": "dates_fatalities.png",
+  "event_counts_graph": "event_counts.png",
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
   "output_folder": "../output/",
