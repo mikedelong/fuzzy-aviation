@@ -4,6 +4,7 @@ from os.path import isdir
 from time import time
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 
@@ -51,14 +52,16 @@ if __name__ == '__main__':
     data.columns = [item.strip() for item in data.columns]
     logger.debug('columns after stripping: %s' % data.columns.values)
     logger.debug('initial data is %d rows x %d columns' % data.shape)
+    data.replace('  ', np.nan, inplace=True)
     event_date = 'Event Date'
     data[event_date] = data[event_date].astype('datetime64')
     total_fatalities = 'Total Fatal Injuries'
-    data[total_fatalities].replace('  ', '0', inplace=True)
+    data[total_fatalities].replace(np.nan, 0, inplace=True)
     data[total_fatalities] = data[total_fatalities].astype('int')
 
     for key, value in data.dtypes.items():
-        logger.debug('column %s has type: %s' % (key, value))
+        null_count = data[key].isnull().sum()
+        logger.debug('column %s has type: %s and %d nulls' % (key, value, null_count))
     cutoff_year = 1979
     kind = 'bar'
     fatalities_data_to_plot = data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index(
