@@ -74,10 +74,13 @@ if __name__ == '__main__':
     full_output_file = output_folder + output_file
     logger.debug('writing dates-fatalities graph to %s' % full_output_file)
     plt.savefig(full_output_file)
-    plt.close()
+    plt.close('all')
 
-    data['Count'] = 1
-    accident_counts = data[[event_date, 'Count']][data[event_date].dt.year > cutoff_year].set_index(
+    # let's get a count of accidents by year
+    count = 'Count'
+    data[count] = 1
+    # we still need to cut off prior to 1980 for some reason
+    accident_counts = data[[event_date, count]][data[event_date].dt.year > cutoff_year].set_index(
         [event_date]).resample('Y').sum()
     axes = accident_counts.plot(kind=kind)
     axes.set_xticklabels(pd.to_datetime(accident_counts.index).year.values)
@@ -85,7 +88,18 @@ if __name__ == '__main__':
     full_output_file = output_folder + output_file
     logger.debug('writing events counts graph to %s' % full_output_file)
     plt.savefig(full_output_file)
-    plt.close()
+    plt.close('all')
+
+    # let's see if we have seasonality
+    day_of_year = 'Day of Year'
+    data[day_of_year] = data[event_date].dt.dayofyear
+    day_counts = data[[day_of_year, count]].groupby(day_of_year).sum()
+    day_counts.plot()
+    output_file = get_setting('day_of_year_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing day of year graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
