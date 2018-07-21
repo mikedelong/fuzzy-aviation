@@ -92,6 +92,7 @@ if __name__ == '__main__':
 
     # let's see if we have seasonality
     day_of_year = 'Day of Year'
+    # todo fix this so we handle leap years correctly
     data[day_of_year] = data[event_date].dt.dayofyear
     day_counts = data[[day_of_year, count]].groupby(day_of_year).sum()
     day_counts.plot(linestyle='None', marker='.')
