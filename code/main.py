@@ -94,10 +94,21 @@ if __name__ == '__main__':
     day_of_year = 'Day of Year'
     data[day_of_year] = data[event_date].dt.dayofyear
     day_counts = data[[day_of_year, count]].groupby(day_of_year).sum()
-    day_counts.plot()
+    day_counts.plot(linestyle='None', marker='.')
     output_file = get_setting('day_of_year_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing day of year graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
+    # let's see if we have seasonality
+    month = 'Month'
+    data[month] = data[event_date].dt.month
+    month_counts = data[[month, count]].groupby(month).sum()
+    month_counts.plot(linestyle='None', marker='.')
+    output_file = get_setting('month_count_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing month count graph to %s' % full_output_file)
     plt.savefig(full_output_file)
     plt.close('all')
 
