@@ -4,6 +4,7 @@
   "event_counts_graph": "event_counts.png",
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
+  "month_count_graph": "month_count.png",
   "output_folder": "../output/",
   "zz": 0
 }
