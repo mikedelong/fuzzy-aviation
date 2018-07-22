@@ -95,7 +95,9 @@ if __name__ == '__main__':
     # todo fix this so we handle leap years correctly
     data[day_of_year] = data[event_date].dt.dayofyear
     day_counts = data[[day_of_year, count]].groupby(day_of_year).sum()
-    day_counts.plot(linestyle='None', marker='.')
+    linestyle = 'None'
+    marker = '.'
+    day_counts.plot(linestyle=linestyle, marker=marker)
     output_file = get_setting('day_of_year_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing day of year graph to %s' % full_output_file)
@@ -106,7 +108,9 @@ if __name__ == '__main__':
     month = 'Month'
     data[month] = data[event_date].dt.month
     month_counts = data[[month, count]].groupby(month).sum()
-    month_counts.plot(linestyle='None', marker='.')
+    linestyle = 'None'
+    marker = '.'
+    month_counts.plot(linestyle=linestyle, marker=marker)
     output_file = get_setting('month_count_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing month count graph to %s' % full_output_file)
