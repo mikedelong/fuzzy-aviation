@@ -90,9 +90,8 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
-    # let's see if we have seasonality
+    # seasonality by day of year
     day_of_year = 'Day of Year'
-    # todo fix this so we handle leap years correctly
     data[day_of_year] = data[event_date].dt.dayofyear
     day_counts = data[[day_of_year, count]].groupby(day_of_year).sum()
     linestyle = 'None'
@@ -104,7 +103,20 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
-    # let's see if we have seasonality
+    # seasonality by date in year
+    date_no_year = 'Date no year'
+    data[date_no_year] = data[event_date].dt.strftime('%m-%d')
+    date_counts = data[[date_no_year, count]].groupby(date_no_year).sum()
+    linestyle = 'None'
+    marker = '.'
+    date_counts.plot(linestyle=linestyle, marker=marker)
+    output_file = get_setting('date_no_year_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing date no year graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
+    # seasonality by month
     month = 'Month'
     data[month] = data[event_date].dt.month
     month_counts = data[[month, count]].groupby(month).sum()
