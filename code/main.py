@@ -142,6 +142,19 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    # seasonality by day-of-week
+    day_of_week = 'Day of Week'
+    data[day_of_week] = data[event_date].dt.dayofweek
+    day_counts = data[[day_of_week, count]].groupby(day_of_week).sum()
+    linestyle = 'None'
+    marker = '.'
+    day_counts.plot(linestyle=linestyle, marker=marker)
+    output_file = get_setting('day_of_week_count_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing day of week count graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
