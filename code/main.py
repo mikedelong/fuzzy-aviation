@@ -129,6 +129,19 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    # seasonality by day-of-month
+    day_of_month = 'Day of Month'
+    data[day_of_month] = data[event_date].dt.day
+    day_counts = data[[day_of_month, count]].groupby(day_of_month).sum()
+    linestyle = 'None'
+    marker = '.'
+    day_counts.plot(linestyle=linestyle, marker=marker)
+    output_file = get_setting('day_count_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing day count graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
