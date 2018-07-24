@@ -9,5 +9,6 @@
   "input_folder": "../data/",
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
+  "unique_count_threshold": 12,
   "zz": 0
 }
