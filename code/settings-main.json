@@ -6,12 +6,13 @@
   "date_no_year_graph": "by_date_no_year.png",
   "event_counts_graph": "event_counts.png",
   "fields_to_strip_as_strings": [
+    "Investigation Type",
     "Report Status"
   ],
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
-  "unique_count_threshold": 12,
+  "unique_count_threshold": 100,
   "zz": 0
 }
