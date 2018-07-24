@@ -63,6 +63,8 @@ if __name__ == '__main__':
         null_count = data[key].isnull().sum()
         unique_count = data[key].nunique()
         logger.debug('column %s has type: %s, %d uniques, and %d nulls' % (key, value, unique_count, null_count))
+        if unique_count < 10:
+            logger.debug('unique values are %s' % data[key].unique())
     cutoff_year = 1979
     kind = 'bar'
     fatalities_data_to_plot = data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index(
