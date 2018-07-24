@@ -59,11 +59,12 @@ if __name__ == '__main__':
     data[total_fatalities].replace(np.nan, 0, inplace=True)
     data[total_fatalities] = data[total_fatalities].astype('int')
 
+    unique_count_threshold = get_setting('unique_count_threshold', settings)
     for key, value in data.dtypes.items():
         null_count = data[key].isnull().sum()
         unique_count = data[key].nunique()
         logger.debug('column %s has type: %s, %d uniques, and %d nulls' % (key, value, unique_count, null_count))
-        if unique_count < 10:
+        if unique_count < unique_count_threshold:
             logger.debug('unique values are %s' % data[key].unique())
     cutoff_year = 1979
     kind = 'bar'
