@@ -59,6 +59,11 @@ if __name__ == '__main__':
     data[total_fatalities].replace(np.nan, 0, inplace=True)
     data[total_fatalities] = data[total_fatalities].astype('int')
 
+    fields_to_strip_as_strings = get_setting('fields_to_strip_as_strings', settings)
+    for field in fields_to_strip_as_strings:
+        logger.debug('converting %s to string and stripping leading and trailing whitespace' % field)
+        data[field] = data[field].str.strip()
+
     unique_count_threshold = get_setting('unique_count_threshold', settings)
     for key, value in data.dtypes.items():
         null_count = data[key].isnull().sum()
