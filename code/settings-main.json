@@ -6,6 +6,7 @@
   "date_no_year_graph": "by_date_no_year.png",
   "event_counts_graph": "event_counts.png",
   "fields_to_strip_as_strings": [
+    "Event Id",
     "Investigation Type",
     "Report Status"
   ],
