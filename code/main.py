@@ -71,6 +71,8 @@ if __name__ == '__main__':
         logger.debug('column %s has type: %s, %d uniques, and %d nulls' % (key, value, unique_count, null_count))
         if unique_count < unique_count_threshold:
             logger.debug('unique values are %s' % data[key].unique())
+        else:
+            logger.debug('some unique values are %s' % data[key].unique()[:unique_count_threshold])
     cutoff_year = 1979
     kind = 'bar'
     fatalities_data_to_plot = data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index(
