@@ -173,7 +173,11 @@ if __name__ == '__main__':
                  (amateur_built_value_counts['Yes'], amateur_built_value_counts['No'],
                   data[amateur_built].isnull().sum()))
     data[amateur_built].value_counts().plot(kind='bar')
-    plt.show()
+    output_file = get_setting('amateur_built_count_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing amateur built count graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
