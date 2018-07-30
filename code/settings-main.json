@@ -7,6 +7,7 @@
   "event_counts_graph": "event_counts.png",
   "fields_to_strip_as_strings": [
     "Accident Number",
+    "Amateur Built",
     "Event Id",
     "Investigation Type",
     "Report Status"
