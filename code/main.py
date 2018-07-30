@@ -168,12 +168,13 @@ if __name__ == '__main__':
 
     # visualize crashes by experimental aircraft
     amateur_built = 'Amateur Built'
-    amateur_built_value_counts = data[amateur_built].value_counts()
+    amateur_built_value_counts = data[amateur_built].value_counts().to_dict()
     logger.debug('We have %d amateur-built, %d not amateur-built, and %d unknown' %
                  (amateur_built_value_counts['Yes'], amateur_built_value_counts['No'],
                   data[amateur_built].isnull().sum()))
-    amateur_built_value_counts.plot(kind='bar')
+    data[amateur_built].value_counts().plot(kind='bar')
     plt.show()
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
