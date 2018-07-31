@@ -6,9 +6,7 @@ from time import time
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
-
-# import seaborn as sns
+import seaborn as sns
 
 
 def get_setting(arg_setting_name, arg_settings):
@@ -185,8 +183,8 @@ if __name__ == '__main__':
     # let's try one simple facet
     year = 'Year'
     data[year] = data[event_date].dt.year
-    # t0 = data[[amateur_built, year, count]]
-    # sns.FacetGrid()
+    graph = sns.FacetGrid(data[[amateur_built, year, count]], col=amateur_built, row=count).map(plt.hist, year)
+    plt.show()
 
     logger.debug('done')
     finish_time = time()
