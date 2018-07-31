@@ -183,7 +183,7 @@ if __name__ == '__main__':
     # let's try one simple facet
     year = 'Year'
     data[year] = data[event_date].dt.year
-    graph = sns.FacetGrid(data[[amateur_built, year, count]], col=amateur_built, row=count).map(plt.hist, year)
+    graph = sns.FacetGrid(data[[amateur_built, year]], col=amateur_built).map(plt.hist, year)
     plt.show()
 
     logger.debug('done')
