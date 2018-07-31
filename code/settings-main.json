@@ -1,5 +1,6 @@
 {
   "amateur_built_count_graph": "amateur_built.png",
+  "amateur_built_year_histogram": "amateur_built_histogram.png",
   "dates_fatalities_graph": "dates_fatalities.png",
   "day_count_graph": "by_day_of_month.png",
   "day_of_week_count_graph": "by_day_of_week.png",
