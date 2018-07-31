@@ -184,7 +184,11 @@ if __name__ == '__main__':
     year = 'Year'
     data[year] = data[event_date].dt.year
     graph = sns.FacetGrid(data[[amateur_built, year]], col=amateur_built).map(plt.hist, year)
-    plt.show()
+    output_file = get_setting('amateur_built_year_histogram', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing amateur built year histogram to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
