@@ -181,6 +181,7 @@ if __name__ == '__main__':
     plt.close('all')
 
     # let's try one simple facet
+    # https://seaborn.pydata.org/generated/seaborn.FacetGrid.html
     year = 'Year'
     data[year] = data[event_date].dt.year
     graph = sns.FacetGrid(data[[amateur_built, year]], col=amateur_built).map(plt.hist, year)
