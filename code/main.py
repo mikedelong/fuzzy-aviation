@@ -8,6 +8,9 @@ import numpy as np
 import pandas as pd
 
 
+# import seaborn as sns
+
+
 def get_setting(arg_setting_name, arg_settings):
     if arg_setting_name in arg_settings.keys():
         result = arg_settings[arg_setting_name]
@@ -178,6 +181,12 @@ if __name__ == '__main__':
     logger.debug('writing amateur built count graph to %s' % full_output_file)
     plt.savefig(full_output_file)
     plt.close('all')
+
+    # let's try one simple facet
+    year = 'Year'
+    data[year] = data[event_date].dt.year
+    # t0 = data[[amateur_built, year, count]]
+    # sns.FacetGrid()
 
     logger.debug('done')
     finish_time = time()
