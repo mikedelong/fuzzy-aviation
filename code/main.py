@@ -184,10 +184,19 @@ if __name__ == '__main__':
     # https://seaborn.pydata.org/generated/seaborn.FacetGrid.html
     year = 'Year'
     data[year] = data[event_date].dt.year
-    graph = sns.FacetGrid(data[data[year] > cutoff_year][[amateur_built, year]], col=amateur_built).map(plt.hist, year)
+    amateur_built_graph = sns.FacetGrid(data[data[year] > cutoff_year][[amateur_built, year]],
+                                        col=amateur_built).map(plt.hist, year)
     output_file = get_setting('amateur_built_year_histogram', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing amateur built year histogram to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
+    report_status = 'Report Status'
+    graph = sns.FacetGrid(data[data[year] > cutoff_year][[report_status, year]], col=report_status).map(plt.hist, year)
+    output_file = get_setting('report_status_year_histogram', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing report status year histogram to %s' % full_output_file)
     plt.savefig(full_output_file)
     plt.close('all')
 
