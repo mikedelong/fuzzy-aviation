@@ -200,6 +200,11 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    publication_date = 'Publication Date'
+    data[publication_date] = data[publication_date].str.strip()
+    with_publication_dates = data[data[publication_date].str.len() > 0]
+    logger.debug(with_publication_dates.shape)
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
