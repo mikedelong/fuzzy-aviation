@@ -202,8 +202,14 @@ if __name__ == '__main__':
 
     publication_date = 'Publication Date'
     data[publication_date] = data[publication_date].str.strip()
-    with_publication_dates = data[data[publication_date].str.len() > 0]
+    with_publication_dates = data[data[publication_date].str.len() > 0].copy(deep=True)
     logger.debug(with_publication_dates.shape)
+    with_publication_dates[publication_date] = with_publication_dates[publication_date].astype('datetime64')
+    publication_wait = 'Publication Wait'
+    with_publication_dates[publication_wait] = (
+            with_publication_dates[publication_date] - with_publication_dates[event_date])
+    publication_wait_days = 'Publication Wait Days'
+    with_publication_dates[publication_wait_days] = with_publication_dates[publication_wait].dt.days
 
     logger.debug('done')
     finish_time = time()
