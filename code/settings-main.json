@@ -16,6 +16,7 @@
   ],
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
+  "log_publication_delay_graph": "log_publication_delay_histogram.png",
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
   "report_status_year_histogram": "report_status_histogram.png",
