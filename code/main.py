@@ -213,7 +213,11 @@ if __name__ == '__main__':
     with_publication_dates[log_publication_wait_days] = \
         with_publication_dates[publication_wait].dt.days.apply(lambda x: 0 if x == 0 else np.log(x))
     with_publication_dates[log_publication_wait_days].hist()
-    plt.show()
+    output_file = get_setting('log_publication_delay_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing log publication delay histogram to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
