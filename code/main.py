@@ -193,7 +193,8 @@ if __name__ == '__main__':
     plt.close('all')
 
     report_status = 'Report Status'
-    graph = sns.FacetGrid(data[data[year] > cutoff_year][[report_status, year]], col=report_status).map(plt.hist, year)
+    report_status_graph = sns.FacetGrid(data[data[year] > cutoff_year][[report_status, year]], col=report_status).map(
+        plt.hist, year)
     output_file = get_setting('report_status_year_histogram', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing report status year histogram to %s' % full_output_file)
@@ -208,8 +209,11 @@ if __name__ == '__main__':
     publication_wait = 'Publication Wait'
     with_publication_dates[publication_wait] = (
             with_publication_dates[publication_date] - with_publication_dates[event_date])
-    publication_wait_days = 'Publication Wait Days'
-    with_publication_dates[publication_wait_days] = with_publication_dates[publication_wait].dt.days
+    log_publication_wait_days = 'Log Publication Wait Days'
+    with_publication_dates[log_publication_wait_days] = \
+        with_publication_dates[publication_wait].dt.days.apply(lambda x: 0 if x == 0 else np.log(x))
+    with_publication_dates[log_publication_wait_days].hist()
+    plt.show()
 
     logger.debug('done')
     finish_time = time()
