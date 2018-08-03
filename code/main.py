@@ -56,9 +56,12 @@ if __name__ == '__main__':
     data.replace('  ', np.nan, inplace=True)
     event_date = 'Event Date'
     data[event_date] = data[event_date].astype('datetime64')
-    total_fatalities = 'Total Fatal Injuries'
-    data[total_fatalities].replace(np.nan, 0, inplace=True)
-    data[total_fatalities] = data[total_fatalities].astype('int')
+    integer_fields = get_setting('integer_fields', settings)
+    # we are choosing here to replace our NaNs with zeros
+    # which is not the same thing as knowing they are actually zero
+    for column in integer_fields:
+        data[column].replace(np.nan, 0, inplace=True)
+        data[column] = data[column].astype('int')
 
     fields_to_strip_as_strings = get_setting('fields_to_strip_as_strings', settings)
     for field in fields_to_strip_as_strings:
@@ -76,6 +79,7 @@ if __name__ == '__main__':
             logger.debug('some unique values are %s' % data[key].unique()[:unique_count_threshold])
     cutoff_year = 1979
     kind = 'bar'
+    total_fatalities = 'Total Fatal Injuries'
     fatalities_data_to_plot = data[[event_date, total_fatalities]][data[event_date].dt.year > cutoff_year].set_index(
         [event_date]).resample('Y').sum()
     axes = fatalities_data_to_plot.plot(kind=kind)
