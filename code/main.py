@@ -29,7 +29,6 @@ def check_exists(arg_folder_name, arg_descriptor):
 
 if __name__ == '__main__':
     start_time = time()
-
     formatter = logging.Formatter('%(asctime)s : %(name)s :: %(levelname)s : %(message)s')
     logger = logging.getLogger('main')
     logger.setLevel(logging.DEBUG)
@@ -60,6 +59,8 @@ if __name__ == '__main__':
     # we are choosing here to replace our NaNs with zeros
     # which is not the same thing as knowing they are actually zero
     for column in integer_fields:
+        logger.debug('column %s: we are replacing %d nans and converting the remaining values to integers' %
+                     (column, data[column].isnull().sum()))
         data[column].replace(np.nan, 0, inplace=True)
         data[column] = data[column].astype('int')
 
