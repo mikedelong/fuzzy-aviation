@@ -16,6 +16,12 @@
   ],
   "input_file": "AviationData.txt",
   "input_folder": "../data/",
+  "integer_fields": [
+    "Total Fatal Injuries",
+    "Total Minor Injuries",
+    "Total Serious Injuries",
+    "Total Uninjured"
+  ],
   "log_publication_delay_graph": "log_publication_delay_histogram.png",
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
