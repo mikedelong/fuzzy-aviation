@@ -58,12 +58,12 @@ if __name__ == '__main__':
     integer_fields = get_setting('integer_fields', settings)
     # we are choosing here to replace our NaNs with zeros
     # which is not the same thing as knowing they are actually zero
-    # we should probably add a column here instead of losing the NaNs
     for column in integer_fields:
+        new_name = column + ' asint'
         logger.debug('column %s: we are replacing %d nans and converting the remaining values to integers' %
                      (column, data[column].isnull().sum()))
-        data[column].replace(np.nan, 0, inplace=True)
-        data[column] = data[column].astype('int')
+        data[new_name] = data[column].replace(np.nan, 0)
+        data[new_name] = data[new_name].astype('int')
 
     fields_to_strip_as_strings = get_setting('fields_to_strip_as_strings', settings)
     for field in fields_to_strip_as_strings:
