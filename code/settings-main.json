@@ -26,6 +26,6 @@
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
   "report_status_year_histogram": "report_status_histogram.png",
-  "unique_count_threshold": 100,
+  "unique_count_threshold": 50,
   "zz": 0
 }
