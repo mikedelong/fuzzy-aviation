@@ -225,6 +225,14 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    df = data.copy(deep=True)
+    logger.debug('we are starting with %d rows' % len(df))
+    for column in integer_fields:
+        df = df[~df[column].isnull()]
+        logger.debug('after removing the nulls from column %s we have %d rows (%.2f)' %
+                     (column, len(df), 100 * float(len(df)) / float(len(data))))
+    logger.debug('we are ending with %d rows' % len(df))
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
