@@ -58,6 +58,7 @@ if __name__ == '__main__':
     integer_fields = get_setting('integer_fields', settings)
     # we are choosing here to replace our NaNs with zeros
     # which is not the same thing as knowing they are actually zero
+    # we should probably add a column here instead of losing the NaNs
     for column in integer_fields:
         logger.debug('column %s: we are replacing %d nans and converting the remaining values to integers' %
                      (column, data[column].isnull().sum()))
