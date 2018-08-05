@@ -236,8 +236,7 @@ if __name__ == '__main__':
     float_fields = get_setting('float_fields', settings)
     for field in float_fields:
         data[field] = data[field].astype('float64')
-
-    plt.scatter(data['Longitude'], data['Latitude'])
+    plt.scatter(data['Longitude'], data['Latitude'], s=1)
     output_file = get_setting('event_map_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing event map to %s' % full_output_file)
