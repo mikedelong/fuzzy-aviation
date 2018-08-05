@@ -238,7 +238,7 @@ if __name__ == '__main__':
         data[field] = data[field].astype('float64')
 
     plt.scatter(data['Longitude'], data['Latitude'])
-    output_file = get_setting('latitude_longitude_graph', settings)
+    output_file = get_setting('event_map_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing event map to %s' % full_output_file)
     plt.savefig(full_output_file)
