@@ -74,7 +74,8 @@ if __name__ == '__main__':
     for key, value in data.dtypes.items():
         null_count = data[key].isnull().sum()
         unique_count = data[key].nunique()
-        logger.debug('column %s has type: %s, %d uniques, and %d nulls' % (key, value, unique_count, null_count))
+        logger.debug('column %s has type: %s, %d uniques, and %d nulls (%.1f%%)' %
+                     (key, value, unique_count, null_count, 100 * float(null_count) / float(len(data))))
         if unique_count < unique_count_threshold:
             logger.debug('unique values are %s' % data[key].unique())
         else:
