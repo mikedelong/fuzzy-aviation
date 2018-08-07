@@ -11,6 +11,7 @@
   "fields_to_strip_as_strings": [
     "Accident Number",
     "Amateur Built",
+    "Country",
     "Event Id",
     "Investigation Type",
     "Report Status"
