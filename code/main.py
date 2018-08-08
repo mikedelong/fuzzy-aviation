@@ -56,6 +56,12 @@ if __name__ == '__main__':
     event_date = 'Event Date'
     data[event_date] = data[event_date].astype('datetime64')
     integer_fields = get_setting('integer_fields', settings)
+
+    # remove our empty column
+    columns_to_delete = [item for item in list(data) if len(item) < 3]
+    logger.debug('deleting %d columns because their names are too short' % len(columns_to_delete))
+    data.drop(axis=1, inplace=True, labels=columns_to_delete)
+
     # we are choosing here to replace our NaNs with zeros
     # which is not the same thing as knowing they are actually zero
     for column in integer_fields:
@@ -65,10 +71,10 @@ if __name__ == '__main__':
         data[new_name] = data[column].replace(np.nan, 0)
         data[new_name] = data[new_name].astype('int')
 
-    fields_to_strip_as_strings = get_setting('fields_to_strip_as_strings', settings)
-    for field in fields_to_strip_as_strings:
-        logger.debug('converting %s to string and stripping leading and trailing whitespace' % field)
-        data[field] = data[field].str.strip()
+    for field, field_type in data.dtypes.items():
+        if field_type == 'object':
+            logger.debug('converting %s to string and stripping leading and trailing whitespace' % field)
+            data[field] = data[field].str.strip()
 
     unique_count_threshold = get_setting('unique_count_threshold', settings)
     for key, value in data.dtypes.items():
