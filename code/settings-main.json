@@ -14,6 +14,7 @@
     "Country",
     "Event Id",
     "Investigation Type",
+    "Location",
     "Report Status"
   ],
   "float_fields": [
