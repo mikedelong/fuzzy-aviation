@@ -8,15 +8,6 @@
   "date_no_year_graph": "by_date_no_year.png",
   "event_counts_graph": "event_counts.png",
   "event_map_graph": "event_map.png",
-  "fields_to_strip_as_strings": [
-    "Accident Number",
-    "Amateur Built",
-    "Country",
-    "Event Id",
-    "Investigation Type",
-    "Location",
-    "Report Status"
-  ],
   "float_fields": [
     "Latitude",
     "Longitude"
