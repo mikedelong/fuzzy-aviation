@@ -76,6 +76,10 @@ if __name__ == '__main__':
             logger.debug('converting %s to string and stripping leading and trailing whitespace' % field)
             data[field] = data[field].str.strip()
 
+    float_fields = get_setting('float_fields', settings)
+    for field in float_fields:
+        data[field] = data[field].astype('float64')
+
     unique_count_threshold = get_setting('unique_count_threshold', settings)
     for key, value in data.dtypes.items():
         null_count = data[key].isnull().sum()
@@ -240,9 +244,6 @@ if __name__ == '__main__':
                      (column, len(df), 100 * float(len(df)) / float(len(data))))
     logger.debug('we are ending with %d rows' % len(df))
 
-    float_fields = get_setting('float_fields', settings)
-    for field in float_fields:
-        data[field] = data[field].astype('float64')
     plt.scatter(data['Longitude'], data['Latitude'], s=1)
     output_file = get_setting('event_map_graph', settings)
     full_output_file = output_folder + output_file
