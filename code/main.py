@@ -251,6 +251,11 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    # todo find a way to do treeplots
+    registration_number = 'Registration Number'
+    data['RN'] = data[registration_number].str[0:1]
+    logger.debug(data['RN'].value_counts())
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
