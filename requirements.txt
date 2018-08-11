@@ -1,3 +1,4 @@
+squarify
 seaborn
 numpy
 matplotlib
