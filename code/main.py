@@ -256,7 +256,11 @@ if __name__ == '__main__':
     data['RN'] = data[registration_number].str[0:2]
     t0 = data['RN'].value_counts().to_dict()
     squarify.plot(sizes=t0.values(), label=t0.keys())
-    plt.show()
+    output_file = get_setting('registration_number_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing registration number graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
