@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import squarify
 
 
 def get_setting(arg_setting_name, arg_settings):
@@ -251,10 +252,11 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
-    # todo find a way to do treeplots
     registration_number = 'Registration Number'
-    data['RN'] = data[registration_number].str[0:1]
-    logger.debug(data['RN'].value_counts())
+    data['RN'] = data[registration_number].str[0:2]
+    t0 = data['RN'].value_counts().to_dict()
+    squarify.plot(sizes=t0.values(), label=t0.keys())
+    plt.show()
 
     logger.debug('done')
     finish_time = time()
