@@ -23,6 +23,7 @@
   "log_publication_delay_graph": "log_publication_delay_histogram.png",
   "month_count_graph": "month_count.png",
   "output_folder": "../output/",
+  "registration_number_graph": "registration_number_treemap.png",
   "report_status_year_histogram": "report_status_histogram.png",
   "unique_count_threshold": 50,
   "zz": 0
