@@ -253,9 +253,8 @@ if __name__ == '__main__':
     plt.close('all')
 
     registration_number = 'Registration Number'
-    data['RN'] = data[registration_number].str[0:2]
-    t0 = data['RN'].value_counts().to_dict()
-    squarify.plot(sizes=t0.values(), label=t0.keys())
+    values_to_plot = data[registration_number].str[0:2].value_counts().to_dict()
+    squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
     output_file = get_setting('registration_number_graph', settings)
     full_output_file = output_folder + output_file
     logger.debug('writing registration number graph to %s' % full_output_file)
