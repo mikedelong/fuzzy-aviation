@@ -26,5 +26,6 @@
   "registration_number_graph": "registration_number_treemap.png",
   "report_status_year_histogram": "report_status_histogram.png",
   "unique_count_threshold": 50,
+  "weather_condition_graph": "weather_condition.png",
   "zz": 0
 }
