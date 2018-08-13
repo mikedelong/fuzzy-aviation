@@ -271,6 +271,15 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    far_description = 'FAR Description'
+    values_to_plot = data[far_description].value_counts().to_dict()
+    squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
+    output_file = get_setting('far_description_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing FAR description graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
