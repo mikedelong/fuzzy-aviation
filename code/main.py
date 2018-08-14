@@ -280,6 +280,11 @@ if __name__ == '__main__':
     plt.savefig(full_output_file)
     plt.close('all')
 
+    phase = 'Broad Phase of Flight'
+    values_to_plot = data[phase].value_counts().to_dict()
+    squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
+    plt.show()
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
