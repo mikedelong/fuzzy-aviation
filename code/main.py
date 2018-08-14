@@ -283,6 +283,7 @@ if __name__ == '__main__':
     phase = 'Broad Phase of Flight'
     values_to_plot = data[phase].value_counts().to_dict()
     squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
+    plt.title(phase)
     plt.show()
 
     logger.debug('done')
