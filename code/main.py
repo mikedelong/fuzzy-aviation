@@ -284,7 +284,11 @@ if __name__ == '__main__':
     values_to_plot = data[phase].value_counts().to_dict()
     squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
     plt.title(phase)
-    plt.show()
+    output_file = get_setting('phase_of_flight_graph', settings)
+    full_output_file = output_folder + output_file
+    logger.debug('writing phase of flight graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+    plt.close('all')
 
     logger.debug('done')
     finish_time = time()
