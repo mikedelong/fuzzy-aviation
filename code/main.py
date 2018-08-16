@@ -272,12 +272,15 @@ if __name__ == '__main__':
     plt.close('all')
 
     far_description = 'FAR Description'
-    keys_to_keep = pd.DataFrame(data[far_description].value_counts()).index[:10]
-    logger.debug(data[far_description].value_counts())
+    keys_to_keep = pd.DataFrame(data[far_description].value_counts()).index[:10].values
+    logger.debug(data[far_description].value_counts().to_dict())
+    logger.debug(sum(data[far_description].value_counts().to_dict().values()))
     logger.debug(keys_to_keep)
     far_description_aggregated = 'FAR Description Aggregated'
-    data[far_description_aggregated] = data[far_description].apply(lambda x: x if x in keys_to_keep else 'Other')
+    data[far_description_aggregated] = data[far_description].apply(
+        lambda x: 'Other' if x not in keys_to_keep and x != '' else x)
     values_to_plot = data[far_description_aggregated].value_counts().to_dict()
+    logger.debug(values_to_plot)
     squarify.plot(sizes=values_to_plot.values(), label=values_to_plot.keys())
     output_file = get_setting('far_description_graph', settings)
     full_output_file = output_folder + output_file
